@@ -1,0 +1,204 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "MULTI-WAY ULTRA",
+      "price": 50.22,
+      "image": "images/resource/products/1.jpg",
+      "lightboxImage": "images/resource/products/1.jpg",
+      "tag": "New",
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 2,
+      "name": "SIDE-TIE TANK",
+      "price": 39.32,
+      "image": "images/resource/products/2.jpg",
+      "lightboxImage": "images/resource/products/2.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 3,
+      "name": "COLD CREWNECK",
+      "price": 21.00,
+      "image": "images/resource/products/3.jpg",
+      "lightboxImage": "images/resource/products/3.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 4,
+      "name": "WINTER WALKING",
+      "price": 91.50,
+      "image": "images/resource/products/4.jpg",
+      "lightboxImage": "images/resource/products/4.jpg",
+      "tag": "Trending",
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 5,
+      "name": "BLACK DARK SHIRT",
+      "price": 42.01,
+      "image": "images/resource/products/5.jpg",
+      "lightboxImage": "images/resource/products/5.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "decor"
+    },
+    {
+      "id": 6,
+      "name": "THIN LINE UPPER",
+      "price": 23.32,
+      "image": "images/resource/products/6.jpg",
+      "lightboxImage": "images/resource/products/6.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "decor"
+    },
+    {
+      "id": 7,
+      "name": "GREY T-SHIRT",
+      "price": 14.00,
+      "image": "images/resource/products/7.jpg",
+      "lightboxImage": "images/resource/products/7.jpg",
+      "tag": "Trending",
+      "detailUrl": "product-detail.html",
+      "category": "decor"
+    },
+    {
+      "id": 8,
+      "name": "WOO BANNER",
+      "price": 35.50,
+      "image": "images/resource/products/8.jpg",
+      "lightboxImage": "images/resource/products/8.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "decor"
+    },
+    {
+      "id": 9,
+      "name": "NORDIC SHELF",
+      "price": 129.00,
+      "image": "images/resource/products/1.jpg",
+      "lightboxImage": "images/resource/products/1.jpg",
+      "tag": "New",
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 10,
+      "name": "VELVET ARMCHAIR",
+      "price": 215.75,
+      "image": "images/resource/products/2.jpg",
+      "lightboxImage": "images/resource/products/2.jpg",
+      "tag": "Trending",
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 11,
+      "name": "OAK SIDE TABLE",
+      "price": 88.00,
+      "image": "images/resource/products/3.jpg",
+      "lightboxImage": "images/resource/products/3.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 12,
+      "name": "LINEN SOFA SET",
+      "price": 479.99,
+      "image": "images/resource/products/4.jpg",
+      "lightboxImage": "images/resource/products/4.jpg",
+      "tag": "New",
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 13,
+      "name": "MARBLE COFFEE TABLE",
+      "price": 310.00,
+      "image": "images/resource/products/5.jpg",
+      "lightboxImage": "images/resource/products/5.jpg",
+      "tag": "Trending",
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 14,
+      "name": "RUSTIC WALL CLOCK",
+      "price": 55.49,
+      "image": "images/resource/products/6.jpg",
+      "lightboxImage": "images/resource/products/6.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "decor"
+    },
+    {
+      "id": 15,
+      "name": "CERAMIC VASE SET",
+      "price": 38.90,
+      "image": "images/resource/products/7.jpg",
+      "lightboxImage": "images/resource/products/7.jpg",
+      "tag": "New",
+      "detailUrl": "product-detail.html",
+      "category": "decor"
+    },
+    {
+      "id": 16,
+      "name": "WOVEN FLOOR LAMP",
+      "price": 145.00,
+      "image": "images/resource/products/8.jpg",
+      "lightboxImage": "images/resource/products/8.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "lighting"
+    },
+    {
+      "id": 17,
+      "name": "PENDANT GOLD LIGHT",
+      "price": 199.50,
+      "image": "images/resource/products/1.jpg",
+      "lightboxImage": "images/resource/products/1.jpg",
+      "tag": "Trending",
+      "detailUrl": "product-detail.html",
+      "category": "lighting"
+    },
+    {
+      "id": 18,
+      "name": "BOHO THROW PILLOW",
+      "price": 27.00,
+      "image": "images/resource/products/2.jpg",
+      "lightboxImage": "images/resource/products/2.jpg",
+      "tag": null,
+      "detailUrl": "product-detail.html",
+      "category": "decor"
+    },
+    {
+      "id": 19,
+      "name": "MODULAR BOOKCASE",
+      "price": 260.00,
+      "image": "images/resource/products/3.jpg",
+      "lightboxImage": "images/resource/products/3.jpg",
+      "tag": "New",
+      "detailUrl": "product-detail.html",
+      "category": "furniture"
+    },
+    {
+      "id": 20,
+      "name": "ABSTRACT WALL ART",
+      "price": 74.95,
+      "image": "images/resource/products/4.jpg",
+      "lightboxImage": "images/resource/products/4.jpg",
+      "tag": "Trending",
+      "detailUrl": "product-detail.html",
+      "category": "decor"
+    }
+  ]
+}
