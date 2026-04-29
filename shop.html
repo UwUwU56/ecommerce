@@ -19,6 +19,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
     <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+    <style>
+        .shop-filter-bar { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:30px; padding:16px 20px; background:#f8f8f8; border:1px solid #e8e8e8; }
+        .shop-search-wrap { flex:1; min-width:200px; position:relative; }
+        .shop-search-wrap input { width:100%; padding:10px 14px 10px 38px; border:1px solid #ddd; font-size:14px; outline:none; transition:border-color .2s; }
+        .shop-search-wrap input:focus { border-color:#2a8caa; }
+        .shop-search-wrap .si { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#aaa; }
+        .cat-filters { display:flex; flex-wrap:wrap; gap:8px; }
+        .cat-btn { padding:9px 18px; border:1px solid #ccc; background:#fff; font-size:13px; cursor:pointer; color:#555; transition:all .2s; letter-spacing:.4px; }
+        .cat-btn:hover { border-color:#2a8caa; color:#2a8caa; }
+        .cat-btn.active { background:#2a8caa; border-color:#2a8caa; color:#fff; }
+        #result-count { font-size:13px; color:#999; margin-bottom:18px; }
+        #empty-state { text-align:center; padding:70px 20px; display:none; }
+        #empty-state .ei { font-size:50px; color:#ddd; margin-bottom:14px; }
+        #empty-state h4 { font-size:20px; color:#666; margin-bottom:8px; }
+        #empty-state p { color:#aaa; font-size:14px; }
+        /* Sort dropdown */
+        .sort-wrap { display:flex; align-items:center; gap:8px; margin-left:auto; }
+        .sort-wrap label { font-size:13px; color:#777; white-space:nowrap; }
+        .sort-wrap select { padding:9px 32px 9px 12px; border:1px solid #ccc; background:#fff; font-size:13px; color:#555; cursor:pointer; outline:none; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; transition:border-color .2s; }
+        .sort-wrap select:focus { border-color:#2a8caa; }
+    </style>
 </head>
 
 <body>
@@ -247,189 +268,38 @@
                     <h2>Featured Products</h2>
                 </div>
 
-                <div class="row clearfix">
-
-                    <!--Shop Item-->
-                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image">
-                                <a href="product-detail.html"><img src="images/resource/products/1.jpg" alt="" /></a>
-                                <div class="overlay-box">
-                                    <ul class="option-box">
-                                        <li><a href="#"><span class="far fa-heart"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>
-                                        <li><a href="images/resource/products/1.jpg" class="lightbox-image"
-                                                data-fancybox="products"><span class="fa fa-search"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="tag-banner">New</div>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="product-detail.html">MULTI-WAY ULTRA</a></h3>
-                                <div class="price">$50.22</div>
-                            </div>
-                        </div>
+                <!-- Search & Filter Bar -->
+                <div class="shop-filter-bar">
+                    <div class="shop-search-wrap">
+                        <span class="si fa fa-search"></span>
+                        <input type="text" id="product-search" placeholder="Search products&hellip;">
                     </div>
-
-                    <!--Shop Item-->
-                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image">
-                                <a href="product-detail.html"><img src="images/resource/products/2.jpg" alt="" /></a>
-                                <div class="overlay-box">
-                                    <ul class="option-box">
-                                        <li><a href="#"><span class="far fa-heart"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>
-                                        <li><a href="images/resource/products/2.jpg" class="lightbox-image"
-                                                data-fancybox="products"><span class="fa fa-search"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="product-detail.html">SIDE-TIE TANK</a></h3>
-                                <div class="price">$39.32</div>
-                            </div>
-                        </div>
+                    <div class="cat-filters">
+                        <button class="cat-btn active" data-category="all">All</button>
+                        <button class="cat-btn" data-category="furniture">Furniture</button>
+                        <button class="cat-btn" data-category="decor">Decor</button>
+                        <button class="cat-btn" data-category="lighting">Lighting</button>
                     </div>
-
-                    <!--Shop Item-->
-                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image">
-                                <a href="product-detail.html"><img src="images/resource/products/3.jpg" alt="" /></a>
-                                <div class="overlay-box">
-                                    <ul class="option-box">
-                                        <li><a href="#"><span class="far fa-heart"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>
-                                        <li><a href="images/resource/products/3.jpg" class="lightbox-image"
-                                                data-fancybox="products"><span class="fa fa-search"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="product-detail.html">COLD CREWNECK</a></h3>
-                                <div class="price">$21.00</div>
-                            </div>
-                        </div>
+                    <div class="sort-wrap">
+                        <label for="price-sort">Sort by:</label>
+                        <select id="price-sort">
+                            <option value="default">Default</option>
+                            <option value="low">Price: Low to High</option>
+                            <option value="high">Price: High to Low</option>
+                        </select>
                     </div>
-
-                    <!--Shop Item-->
-                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image">
-                                <a href="product-detail.html"><img src="images/resource/products/4.jpg" alt="" /></a>
-                                <div class="overlay-box">
-                                    <ul class="option-box">
-                                        <li><a href="#"><span class="far fa-heart"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>
-                                        <li><a href="images/resource/products/4.jpg" class="lightbox-image"
-                                                data-fancybox="products"><span class="fa fa-search"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="tag-banner">Trending</div>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="product-detail.html">WINTER WALKING</a></h3>
-                                <div class="price">$91.50</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Shop Item-->
-                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image">
-                                <a href="product-detail.html"><img src="images/resource/products/5.jpg" alt="" /></a>
-                                <div class="overlay-box">
-                                    <ul class="option-box">
-                                        <li><a href="#"><span class="far fa-heart"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>
-                                        <li><a href="images/resource/products/1.jpg" class="lightbox-image"
-                                                data-fancybox="products"><span class="fa fa-search"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="product-detail.html">BLACK DARK SHIRT</a></h3>
-                                <div class="price">$42.01</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Shop Item-->
-                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image">
-                                <a href="product-detail.html"><img src="images/resource/products/6.jpg" alt="" /></a>
-                                <div class="overlay-box">
-                                    <ul class="option-box">
-                                        <li><a href="#"><span class="far fa-heart"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>
-                                        <li><a href="images/resource/products/2.jpg" class="lightbox-image"
-                                                data-fancybox="products"><span class="fa fa-search"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="product-detail.html">THIN LINE UPPER</a></h3>
-                                <div class="price">$23.32</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Shop Item-->
-                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image">
-                                <a href="product-detail.html"><img src="images/resource/products/7.jpg" alt="" /></a>
-                                <div class="overlay-box">
-                                    <ul class="option-box">
-                                        <li><a href="#"><span class="far fa-heart"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>
-                                        <li><a href="images/resource/products/3.jpg" class="lightbox-image"
-                                                data-fancybox="products"><span class="fa fa-search"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="tag-banner">Trending</div>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="product-detail.html">GREY T-SHIRT</a></h3>
-                                <div class="price">$14.00</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Shop Item-->
-                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image">
-                                <a href="product-detail.html"><img src="images/resource/products/8.jpg" alt="" /></a>
-                                <div class="overlay-box">
-                                    <ul class="option-box">
-                                        <li><a href="#"><span class="far fa-heart"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>
-                                        <li><a href="images/resource/products/4.jpg" class="lightbox-image"
-                                                data-fancybox="products"><span class="fa fa-search"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="product-detail.html">WOO BANNER</a></h3>
-                                <div class="price">$35.50</div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
-                <div class="shop-pagination">
-                    <ul class="clearfix">
-                        <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                    </ul>
+                <p id="result-count"></p>
+
+                <!-- Dynamic Product Grid -->
+                <div id="product-grid" class="row clearfix"></div>
+
+                <!-- Empty State -->
+                <div id="empty-state">
+                    <div class="ei"><span class="fa fa-search"></span></div>
+                    <h4>No Products Found</h4>
+                    <p>Try a different search term or select another category.</p>
                 </div>
 
             </div>
@@ -642,6 +512,125 @@
     <script src="js/appear.js"></script>
     <script src="js/scrollbar.js"></script>
     <script src="js/script.js"></script>
+    <script>
+    /* Search & Category Filter — Flow: User Action > Capture Input > Filter Array > Update DOM */
+    (function () {
+        var allProducts = [];
+        var activeCategory = 'all';
+        var activeSort = 'default';
+        var debounceTimer;
+
+        /* 1. Inline product data — works without a server */
+        allProducts = [
+            { id:1,  name:'MULTI-WAY ULTRA',    price:50.22,  image:'images/resource/products/1.jpg', lightboxImage:'images/resource/products/1.jpg', tag:'New',      detailUrl:'product-detail.html', category:'furniture' },
+            { id:2,  name:'SIDE-TIE TANK',      price:39.32,  image:'images/resource/products/2.jpg', lightboxImage:'images/resource/products/2.jpg', tag:null,       detailUrl:'product-detail.html', category:'furniture' },
+            { id:3,  name:'COLD CREWNECK',      price:21.00,  image:'images/resource/products/3.jpg', lightboxImage:'images/resource/products/3.jpg', tag:null,       detailUrl:'product-detail.html', category:'furniture' },
+            { id:4,  name:'WINTER WALKING',     price:91.50,  image:'images/resource/products/4.jpg', lightboxImage:'images/resource/products/4.jpg', tag:'Trending', detailUrl:'product-detail.html', category:'furniture' },
+            { id:5,  name:'BLACK DARK SHIRT',   price:42.01,  image:'images/resource/products/5.jpg', lightboxImage:'images/resource/products/5.jpg', tag:null,       detailUrl:'product-detail.html', category:'decor' },
+            { id:6,  name:'THIN LINE UPPER',    price:23.32,  image:'images/resource/products/6.jpg', lightboxImage:'images/resource/products/6.jpg', tag:null,       detailUrl:'product-detail.html', category:'decor' },
+            { id:7,  name:'GREY T-SHIRT',       price:14.00,  image:'images/resource/products/7.jpg', lightboxImage:'images/resource/products/7.jpg', tag:'Trending', detailUrl:'product-detail.html', category:'decor' },
+            { id:8,  name:'WOO BANNER',         price:35.50,  image:'images/resource/products/8.jpg', lightboxImage:'images/resource/products/8.jpg', tag:null,       detailUrl:'product-detail.html', category:'decor' },
+            { id:9,  name:'NORDIC SHELF',       price:129.00, image:'images/resource/products/1.jpg', lightboxImage:'images/resource/products/1.jpg', tag:'New',      detailUrl:'product-detail.html', category:'furniture' },
+            { id:10, name:'VELVET ARMCHAIR',    price:215.75, image:'images/resource/products/2.jpg', lightboxImage:'images/resource/products/2.jpg', tag:'Trending', detailUrl:'product-detail.html', category:'furniture' },
+            { id:11, name:'OAK SIDE TABLE',     price:88.00,  image:'images/resource/products/3.jpg', lightboxImage:'images/resource/products/3.jpg', tag:null,       detailUrl:'product-detail.html', category:'furniture' },
+            { id:12, name:'LINEN SOFA SET',     price:479.99, image:'images/resource/products/4.jpg', lightboxImage:'images/resource/products/4.jpg', tag:'New',      detailUrl:'product-detail.html', category:'furniture' },
+            { id:13, name:'MARBLE COFFEE TABLE',price:310.00, image:'images/resource/products/5.jpg', lightboxImage:'images/resource/products/5.jpg', tag:'Trending', detailUrl:'product-detail.html', category:'furniture' },
+            { id:14, name:'RUSTIC WALL CLOCK',  price:55.49,  image:'images/resource/products/6.jpg', lightboxImage:'images/resource/products/6.jpg', tag:null,       detailUrl:'product-detail.html', category:'decor' },
+            { id:15, name:'CERAMIC VASE SET',   price:38.90,  image:'images/resource/products/7.jpg', lightboxImage:'images/resource/products/7.jpg', tag:'New',      detailUrl:'product-detail.html', category:'decor' },
+            { id:16, name:'WOVEN FLOOR LAMP',   price:145.00, image:'images/resource/products/8.jpg', lightboxImage:'images/resource/products/8.jpg', tag:null,       detailUrl:'product-detail.html', category:'lighting' },
+            { id:17, name:'PENDANT GOLD LIGHT', price:199.50, image:'images/resource/products/1.jpg', lightboxImage:'images/resource/products/1.jpg', tag:'Trending', detailUrl:'product-detail.html', category:'lighting' },
+            { id:18, name:'BOHO THROW PILLOW',  price:27.00,  image:'images/resource/products/2.jpg', lightboxImage:'images/resource/products/2.jpg', tag:null,       detailUrl:'product-detail.html', category:'decor' },
+            { id:19, name:'MODULAR BOOKCASE',   price:260.00, image:'images/resource/products/3.jpg', lightboxImage:'images/resource/products/3.jpg', tag:'New',      detailUrl:'product-detail.html', category:'furniture' },
+            { id:20, name:'ABSTRACT WALL ART',  price:74.95,  image:'images/resource/products/4.jpg', lightboxImage:'images/resource/products/4.jpg', tag:'Trending', detailUrl:'product-detail.html', category:'decor' }
+        ];
+        renderProducts(allProducts);
+
+        /* 2. Search input – debounced 250ms */
+        document.getElementById('product-search').addEventListener('input', function () {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(applyFilters, 250);
+        });
+
+        /* 3. Category button clicks */
+        document.querySelectorAll('.cat-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.cat-btn').forEach(function (b) { b.classList.remove('active'); });
+                this.classList.add('active');
+                activeCategory = this.dataset.category;
+                applyFilters();
+            });
+        });
+
+        /* 4. Sort dropdown */
+        document.getElementById('price-sort').addEventListener('change', function () {
+            activeSort = this.value;
+            applyFilters();
+        });
+
+        /* 5. Filter + Sort pipeline */
+        function applyFilters() {
+            var query = document.getElementById('product-search').value.trim().toLowerCase();
+
+            var filtered = allProducts;
+
+            /* Step A: filter by category */
+            if (activeCategory !== 'all') {
+                filtered = filtered.filter(function (p) { return p.category === activeCategory; });
+            }
+
+            /* Step B: filter by search query (AND logic) */
+            if (query !== '') {
+                filtered = filtered.filter(function (p) { return p.name.toLowerCase().indexOf(query) !== -1; });
+            }
+
+            /* Step C: sort by price */
+            if (activeSort === 'low') {
+                filtered = filtered.slice().sort(function (a, b) { return a.price - b.price; });
+            } else if (activeSort === 'high') {
+                filtered = filtered.slice().sort(function (a, b) { return b.price - a.price; });
+            }
+
+            renderProducts(filtered);
+        }
+
+        /* 5. Update DOM */
+        function renderProducts(products) {
+            var grid  = document.getElementById('product-grid');
+            var empty = document.getElementById('empty-state');
+            var count = document.getElementById('result-count');
+
+            if (products.length === 0) {
+                grid.innerHTML     = '';
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+                count.textContent  = '';
+                return;
+            }
+
+            grid.style.display  = '';
+            empty.style.display = 'none';
+            count.textContent   = 'Showing ' + products.length + ' product' + (products.length === 1 ? '' : 's');
+
+            grid.innerHTML = products.map(function (p) {
+                var tag = p.tag ? '<div class="tag-banner">' + p.tag + '</div>' : '';
+                return '<div class="shop-item col-lg-3 col-md-6 col-sm-12">'
+                    + '<div class="inner-box">'
+                    + '<div class="image">'
+                    + '<a href="' + p.detailUrl + '"><img src="' + p.image + '" alt="' + p.name + '" /></a>'
+                    + '<div class="overlay-box"><ul class="option-box">'
+                    + '<li><a href="#"><span class="far fa-heart"></span></a></li>'
+                    + '<li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>'
+                    + '<li><a href="' + p.lightboxImage + '" class="lightbox-image" data-fancybox="products"><span class="fa fa-search"></span></a></li>'
+                    + '</ul></div>' + tag
+                    + '</div>'
+                    + '<div class="lower-content">'
+                    + '<h3><a href="' + p.detailUrl + '">' + p.name + '</a></h3>'
+                    + '<div class="price">$' + p.price.toFixed(2) + '</div>'
+                    + '</div></div></div>';
+            }).join('');
+        }
+    }());
+    </script>
 </body>
 
 <!-- stella-orre/shop.html  30 Nov 2019 03:52:14 GMT -->
