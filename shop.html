@@ -39,6 +39,15 @@
         .sort-wrap label { font-size:13px; color:#777; white-space:nowrap; }
         .sort-wrap select { padding:9px 32px 9px 12px; border:1px solid #ccc; background:#fff; font-size:13px; color:#555; cursor:pointer; outline:none; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; transition:border-color .2s; }
         .sort-wrap select:focus { border-color:#2a8caa; }
+        /* ── Cart Icon ── */
+        #cart-icon-btn{position:relative;display:inline-flex;align-items:center;margin-left:18px;font-size:22px;color:#555;transition:color .2s;vertical-align:middle;text-decoration:none;}
+        #cart-icon-btn:hover{color:#2a8caa;}
+        #cart-badge{position:absolute;top:-8px;right:-10px;background:#e94560;color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;}
+        .cart-flash{animation:cartPop .35s ease;}
+        @keyframes cartPop{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+        /* ── Add to Cart button on card ── */
+        .atc-btn{width:100%;margin-top:10px;padding:9px 0;background:#fff;border:1.5px solid #2a8caa;color:#2a8caa;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+        .atc-btn:hover{background:#2a8caa;color:#fff;}
     </style>
 </head>
 
@@ -165,6 +174,10 @@
                             <!-- Outer Box -->
                             <div class="outer-box clearfix">
                                 <div class="search-box-btn"><span class="icon flaticon-magnifying-glass-1"></span></div>
+                                <a id="cart-icon-btn" href="cart-page.html" title="View Cart">
+                                    <span class="fa fa-shopping-bag"></span>
+                                    <span id="cart-badge">0</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -619,18 +632,46 @@
                     + '<a href="' + p.detailUrl + '"><img src="' + p.image + '" alt="' + p.name + '" /></a>'
                     + '<div class="overlay-box"><ul class="option-box">'
                     + '<li><a href="#"><span class="far fa-heart"></span></a></li>'
-                    + '<li><a href="#"><span class="fa fa-shopping-bag"></span></a></li>'
+                    + '<li><a href="#" onclick="addToCart(' + p.id + ');return false;"><span class="fa fa-shopping-bag"></span></a></li>'
                     + '<li><a href="' + p.lightboxImage + '" class="lightbox-image" data-fancybox="products"><span class="fa fa-search"></span></a></li>'
                     + '</ul></div>' + tag
                     + '</div>'
                     + '<div class="lower-content">'
                     + '<h3><a href="' + p.detailUrl + '">' + p.name + '</a></h3>'
                     + '<div class="price">$' + p.price.toFixed(2) + '</div>'
+                    + '<button class="atc-btn" onclick="addToCart(' + p.id + ')">&#128722; Add to Cart</button>'
                     + '</div></div></div>';
             }).join('');
         }
+
+        /* ── CART (localStorage) ── */
+        window.addToCart = function(productId) {
+            var product = allProducts.find(function(p) { return p.id === productId; });
+            if (!product) return;
+            Cart.addItem({ productId: product.id, name: product.name, unitPrice: product.price, image: product.image });
+            updateBadge();
+            /* flash animation */
+            var btn = document.getElementById('cart-icon-btn');
+            btn.classList.remove('cart-flash'); void btn.offsetWidth; btn.classList.add('cart-flash');
+            /* brief feedback */
+            var orig = event && event.target ? event.target : null;
+            if (orig && orig.classList.contains('atc-btn')) {
+                var old = orig.textContent; orig.textContent = '✓ Added!';
+                setTimeout(function(){ orig.textContent = old; }, 900);
+            }
+        };
+
+        function updateBadge() {
+            var t = Cart.calcTotals(Cart.load());
+            var badge = document.getElementById('cart-badge');
+            badge.textContent   = t.totalItems;
+            badge.style.display = t.totalItems > 0 ? 'flex' : 'none';
+        }
+
+        updateBadge();
     }());
     </script>
+    <script src="js/cart.js"></script>
 </body>
 
 <!-- stella-orre/shop.html  30 Nov 2019 03:52:14 GMT -->
