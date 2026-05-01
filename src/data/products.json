@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Modern Chair",
+    "price": 199.99,
+    "category": "Furniture"
+  },
+  {
+    "id": 2,
+    "name": "Wooden Table",
+    "price": 399.99,
+    "category": "Furniture"
+  },
+  {
+    "id": 3,
+    "name": "Desk Lamp",
+    "price": 49.99,
+    "category": "Lighting"
+  }
+]
