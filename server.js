@@ -3,7 +3,11 @@ const productsRouter = require('./src/routes/products');
 
 const app = express();
 
+const path = require('path');
+
 app.use(express.json());
+// Serve static files (HTML, CSS, JS, images, etc.) from the root directory
+app.use(express.static(__dirname));
 
 // API Routes
 app.use('/api/products', productsRouter);
