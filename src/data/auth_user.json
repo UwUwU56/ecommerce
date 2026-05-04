@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "email": "alice@example.com",
+    "username": "alice@example.com",
+    "password": "$2b$10$PfDelogQAzNkzIEVDkj0SebiIPVo3e9v1fGG/cTQPvf3u5C1B89ay",
+    "firstName": "Alice",
+    "registrationDate": "2026-01-18T06:01:08.377Z"
+  },
+  {
+    "id": 2,
+    "email": "bob@example.com",
+    "username": "bob@example.com",
+    "password": "$2b$10$oO4jhyQsB0AZviskVNTqAuLK2ts1k0BZmGxKlAyE4B.Npx22wtoVe",
+    "firstName": "Bob",
+    "registrationDate": "2026-04-02T09:33:14.341Z"
+  },
+  {
+    "id": 3,
+    "email": "charlie@example.com",
+    "username": "charlie@example.com",
+    "password": "$2b$10$YfP5roltH6XWWHs52lEbZOcPU4NNNh8JWVTpNr2dU4JqV.nDSrK9W",
+    "firstName": "Charlie",
+    "registrationDate": "2026-02-21T10:12:34.119Z"
+  },
+  {
+    "id": 4,
+    "email": "diana@example.com",
+    "username": "diana@example.com",
+    "password": "$2b$10$cO31LrDIS4UGco5.ixDH9uILNw6.D70eU3AX7cj3bDICdtzn7qYuO",
+    "firstName": "Diana",
+    "registrationDate": "2026-04-04T23:25:12.192Z"
+  },
+  {
+    "id": 5,
+    "email": "eve@example.com",
+    "username": "eve@example.com",
+    "password": "$2b$10$kIk2p1Y3uevkBoMbKnr9Oean3RqtDKje69hlxET0TI63Mmo5GtOWW",
+    "firstName": "Eve",
+    "registrationDate": "2026-04-02T12:48:09.211Z"
+  },
+  {
+    "id": 6,
+    "email": "frank@example.com",
+    "username": "frank@example.com",
+    "password": "$2b$10$fbC30AbIiiLOQXZR1WeMruPeKXAPwkvJAT.yFYBPCdqWax03Kv3bO",
+    "firstName": "Frank",
+    "registrationDate": "2026-04-08T18:32:06.688Z"
+  },
+  {
+    "id": 7,
+    "email": "grace@example.com",
+    "username": "grace@example.com",
+    "password": "$2b$10$LIiuWa27IYjY.Y.sczQ6puCMwjMibS1PRobh/7/PNesod5ehDlcSu",
+    "firstName": "Grace",
+    "registrationDate": "2026-04-07T01:08:08.916Z"
+  },
+  {
+    "id": 8,
+    "email": "heidi@example.com",
+    "username": "heidi@example.com",
+    "password": "$2b$10$FEuWVAH4vO0Jw1LhQm5hAe7LEIu4/4oNl3J5ORSxi9oUWS8VbJXvW",
+    "firstName": "Heidi",
+    "registrationDate": "2026-03-11T12:08:22.598Z"
+  },
+  {
+    "id": 9,
+    "email": "ivan@example.com",
+    "username": "ivan@example.com",
+    "password": "$2b$10$sOzWldaD3BdV1lpVg2m0NeeIowRlAWk/kckdGL26jPVnTKG5d75C6",
+    "firstName": "Ivan",
+    "registrationDate": "2026-01-31T09:42:33.075Z"
+  },
+  {
+    "id": 10,
+    "email": "judy@example.com",
+    "username": "judy@example.com",
+    "password": "$2b$10$PxQ/NeHY4Ry6EnCScjU7JOvvayjE.PKjEng4ehVCZFrdq7/QAZAUO",
+    "firstName": "Judy",
+    "registrationDate": "2026-02-20T18:16:29.010Z"
+  }
+]

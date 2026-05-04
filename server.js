@@ -10,7 +10,9 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 // API Routes
+const authRouter = require('./src/routes/auth');
 app.use('/api/products', productsRouter);
+app.use('/api', authRouter);
 
 const PORT = process.env.PORT || 3000;
 
