@@ -198,7 +198,7 @@
             <!--Billing Details-->
             <div class="billing-details">
                 <div class="shop-form">
-                    <form method="post" action="http://t.commonsupport.com/stella-orre/checkout.html">
+                    <form id="checkout-form" novalidate>
                         <div class="row clearfix">
                             <div class="col-lg-7 col-md-12 col-sm-12">
 								
@@ -209,13 +209,13 @@
                                         <!--Form Group-->
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">First name <sup>*</sup></div>
-                                            <input type="text" name="field-name" value="" placeholder="First Name">
+                                            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
                                         </div>
                                         
                                         <!--Form Group-->
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Last name <sup>*</sup></div>
-                                            <input type="text" name="field-name" value="" placeholder="Last Name">
+                                            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
                                         </div>
                                         
                                         <!--Form Group-->
@@ -258,8 +258,8 @@
                                         <!--Form Group-->
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Email Address <sup>*</sup></div>
-                                            <input type="text" name="field-name" value="" placeholder="Email Address">
-                                        </div>
+                                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                                        </div>`n                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">`n                                            <div class="field-label">Credit Card <sup>*</sup></div>`n                                            <input type="text" id="creditCard" name="creditCard" placeholder="16-digit Card Number" required>`n                                        </div>
                                         
                                         <!--Form Group-->
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -325,7 +325,7 @@
                                             </ul>
                                         </div>
                                         
-                                        <button type="button" class="theme-btn order-btn">Order Place</button>
+                                        <div id="checkout-errors" style="display:none; margin-bottom:15px;"></div><button type="submit" class="theme-btn order-btn">Order Place</button>
                                         
                                     </div>
                                     <!--End Place Order-->
@@ -490,7 +490,7 @@
 <script src="js/jquery.bootstrap-touchspin.js"></script>
 <script src="js/scrollbar.js"></script>
 <script src="js/script.js"></script>
-</body>
+<script src="js/checkout.js"></script>`n</body>
 
 <!-- stella-orre/checkout.html  30 Nov 2019 03:52:17 GMT -->
 </html>

@@ -13,6 +13,7 @@ app.use(express.static(__dirname));
 const authRouter = require('./src/routes/auth');
 app.use('/api/products', productsRouter);
 app.use('/api', authRouter);
+app.use('/api/checkout', require('./src/routes/checkout'));
 
 const PORT = process.env.PORT || 3000;
 
