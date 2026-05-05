@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - E-Commerce Store</title>
+    <meta name="description" content="Create a new account on our e-commerce store.">
+
+    <style>
+        /* ── Global Reset & Base ────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ── Card Container ─────────────────────────────────────────────── */
+        .register-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 40px 36px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ── Heading ────────────────────────────────────────────────────── */
+        .register-container h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .register-container .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+
+        /* ── Form Groups ────────────────────────────────────────────────── */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .form-group input::placeholder { color: rgba(255,255,255,0.3); }
+
+        .form-group input:focus {
+            border-color: #e94560;
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
+        }
+
+        /* ── Password Requirement Checklist ─────────────────────────────── */
+        .password-rules {
+            margin-top: 10px;
+            padding: 12px 14px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            list-style: none;
+        }
+
+        .password-rules li {
+            font-size: 0.82rem;
+            padding: 3px 0;
+            color: rgba(255,255,255,0.45);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+
+        /* Green when rule passes, red when it fails */
+        .password-rules li.rule-pass { color: #4ade80; }
+        .password-rules li.rule-fail { color: #f87171; }
+
+        .rule-icon {
+            font-weight: 700;
+            font-size: 0.85rem;
+            width: 14px;
+            text-align: center;
+        }
+
+        /* ── Submit Button ──────────────────────────────────────────────── */
+        .btn-register {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            background: linear-gradient(135deg, #e94560, #c62a47);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .btn-register:hover  { opacity: 0.9; transform: translateY(-1px); }
+        .btn-register:active { transform: translateY(0); }
+
+        /* ── Feedback Message ───────────────────────────────────────────── */
+        #message {
+            margin-top: 16px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            text-align: center;
+            display: none;         /* hidden until there's a message */
+        }
+
+        #message:not(:empty) { display: block; }
+
+        #message.success {
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        #message.error {
+            background: rgba(248, 113, 113, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+        }
+
+        #message.info {
+            background: rgba(96, 165, 250, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+
+        /* ── Login Link ─────────────────────────────────────────────────── */
+        .login-link {
+            margin-top: 20px;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.875rem;
+        }
+
+        .login-link a {
+            color: #e94560;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .login-link a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h1>Create Account</h1>
+    <p class="subtitle">Fill in the details below to get started</p>
+
+    <!-- Registration Form -->
+    <form id="registerForm" novalidate>
+
+        <!-- Full Name field -->
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="e.g. John Doe"
+                required
+                autocomplete="name"
+            >
+        </div>
+
+        <!-- Email (used as username) field -->
+        <div class="form-group">
+            <label for="email">Email Address <span style="color:rgba(255,255,255,0.35);font-size:0.78rem;">(used as your username)</span></label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+                autocomplete="email"
+            >
+        </div>
+
+        <!-- Password field with live checklist below -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a strong password"
+                required
+                autocomplete="new-password"
+            >
+
+            <!-- Live password requirement checklist — updated by register.js -->
+            <ul class="password-rules" aria-label="Password requirements">
+                <li id="rule-length">
+                    <span class="rule-icon">✗</span> At least 8 characters
+                </li>
+                <li id="rule-uppercase">
+                    <span class="rule-icon">✗</span> At least one uppercase letter (A-Z)
+                </li>
+                <li id="rule-special">
+                    <span class="rule-icon">✗</span> At least one special character (!, @, #, $, %, ^, &amp;, *)
+                </li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn-register" id="registerBtn">Create Account</button>
+    </form>
+
+    <!-- Server / validation feedback message -->
+    <div id="message" role="alert"></div>
+
+    <p class="login-link">
+        Already have an account? <a href="/login.html">Log in</a>
+    </p>
+</div>
+
+<!-- Load the registration frontend logic -->
+<script src="/js/register.js"></script>
+
+</body>
+</html>

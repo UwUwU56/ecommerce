@@ -1,10 +1,14 @@
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const jwt  = require('jsonwebtoken');
 
-const dataPath = path.join(__dirname, '../data/auth_user.json');
-const JWT_SECRET = 'your_jwt_secret_key_here'; // In a real app, this should be in an environment variable
+// Path to the JSON file that acts as our user "database"
+const dataPath  = path.join(__dirname, '../data/auth_user.json');
+const JWT_SECRET = 'your_jwt_secret_key_here'; // In production, load from an environment variable
+
+// How many salt rounds bcrypt will use — higher = slower (more secure), 10 is a sensible default
+const SALT_ROUNDS = 10;
 
 const login = async (req, res) => {
     try {
@@ -54,6 +58,80 @@ const login = async (req, res) => {
     }
 };
 
+// ─── Register Controller ─────────────────────────────────────────────────────
+
+/**
+ * POST /api/register
+ *
+ * Flow:
+ *  1. TRIGGER   — receives { name, email, password } from the request body.
+ *  2. REQUEST   — validates that all fields are present.
+ *  3. PROCESSING
+ *      a. Load auth_user.json and search for a matching email.
+ *      b. If a duplicate email is found → 409 Conflict (username already taken).
+ *      c. Hash the plain-text password with bcrypt.
+ *      d. Build a new user object and push it into the users array.
+ *      e. Persist the updated array back to auth_user.json.
+ *  4. RESPONSE  — 201 Created on success, appropriate error codes on failure.
+ */
+const register = async (req, res) => {
+    try {
+        // ── TRIGGER: destructure the incoming body ────────────────────────
+        const { name, email, password } = req.body;
+
+        // ── REQUEST: basic presence validation ────────────────────────────
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'Name, email, and password are required.' });
+        }
+
+        // ── PROCESSING (a): read the current user list from disk ──────────
+        const rawData = fs.readFileSync(dataPath, 'utf-8');
+        const users   = JSON.parse(rawData);
+
+        // ── PROCESSING (b): check for duplicate email (username) ──────────
+        // Email is used as the username; no two accounts may share the same email.
+        const existingUser = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+        if (existingUser) {
+            // 409 Conflict — the username (email) is already registered
+            return res.status(409).json({ message: 'An account with that email already exists.' });
+        }
+
+        // ── PROCESSING (c): hash the password before storing it ───────────
+        // Never store plain-text passwords — bcrypt produces a one-way hash.
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+        // ── PROCESSING (d): build the new user record ─────────────────────
+        // Generate the next ID by incrementing the highest existing ID.
+        const nextId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+
+        const newUser = {
+            id:               nextId,
+            email:            email,           // email doubles as the username
+            username:         email,
+            password:         hashedPassword,  // stored as a bcrypt hash, never plain-text
+            firstName:        name,
+            registrationDate: new Date().toISOString(),
+        };
+
+        // Push the new user onto the array
+        users.push(newUser);
+
+        // ── PROCESSING (e): write the updated array back to disk ──────────
+        fs.writeFileSync(dataPath, JSON.stringify(users, null, 2), 'utf-8');
+
+        // ── RESPONSE: 201 Created ─────────────────────────────────────────
+        return res.status(201).json({
+            message: 'Registration successful! You can now log in.',
+            userId:  newUser.id,
+        });
+
+    } catch (error) {
+        console.error('Register error:', error);
+        return res.status(500).json({ message: 'Internal server error.' });
+    }
+};
+
 module.exports = {
-    login
+    login,
+    register,
 };
