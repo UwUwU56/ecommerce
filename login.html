@@ -443,18 +443,6 @@
  * Stores JWT in localStorage and redirects on success
  */
 (function () {
-    // Show the nav button correctly on load
-    const token = localStorage.getItem('token');
-    const navBtn = document.getElementById('navAuthBtn');
-    if (token && navBtn) {
-        navBtn.textContent = 'My Account';
-        navBtn.href = '#';
-        navBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            localStorage.removeItem('token');
-            window.location.reload();
-        });
-    }
 
     const form = document.getElementById('loginForm');
     const msgDiv = document.getElementById('message');

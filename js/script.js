@@ -471,3 +471,26 @@
 	});	
 
 })(window.jQuery);
+/* Auth-state: swap Sign In <-> My Account based on stored JWT */
+(function () {
+    var token  = localStorage.getItem('token');
+    var btns = document.querySelectorAll('#navAuthBtn');
+    if (btns.length === 0) return;
+    if (token) {
+        btns.forEach(function(btn) {
+            var txt = btn.querySelector('.txt');
+            if (txt) txt.textContent = 'My Account';
+            else btn.textContent = 'My Account';
+            btn.removeAttribute('href');
+            btn.style.cursor = 'pointer';
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (confirm('Sign out?')) {
+                    localStorage.removeItem('token');
+                    window.location.reload();
+                }
+            });
+        });
+    }
+})();
+

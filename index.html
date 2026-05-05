@@ -990,26 +990,7 @@
 <script src="js/scrollbar.js"></script>
 <script src="js/script.js"></script>
 
-<script>
-/* Auth-state: swap Sign In ↔ My Account based on stored JWT */
-(function () {
-    var token  = localStorage.getItem('token');
-    var btn    = document.getElementById('navAuthBtn');
-    if (!btn) return;
-    if (token) {
-        btn.querySelector('.txt').textContent = 'My Account';
-        btn.removeAttribute('href');
-        btn.style.cursor = 'pointer';
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (confirm('Sign out?')) {
-                localStorage.removeItem('token');
-                window.location.reload();
-            }
-        });
-    }
-})();
-</script>
+
 </body>
 
 <!-- stella-orre/  30 Nov 2019 03:45:45 GMT -->

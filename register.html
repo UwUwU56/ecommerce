@@ -497,25 +497,7 @@
 <!-- Register-specific logic (validation + API call) -->
 <script src="js/register.js"></script>
 
-<script>
-/**
- * Update the nav auth button based on localStorage token state.
- * If the user already has a token, show "My Account" instead of "Sign In".
- */
-(function () {
-    const token  = localStorage.getItem('token');
-    const navBtn = document.getElementById('navAuthBtn');
-    if (token && navBtn) {
-        navBtn.querySelector('.txt').textContent = 'My Account';
-        navBtn.href = '#';
-        navBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            localStorage.removeItem('token');
-            window.location.reload();
-        });
-    }
-})();
-</script>
+
 
 </body>
 </html>
