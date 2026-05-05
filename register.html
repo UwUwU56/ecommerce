@@ -1,258 +1,521 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - E-Commerce Store</title>
-    <meta name="description" content="Create a new account on our e-commerce store.">
+<meta charset="utf-8">
+<title>Stella Orr'e - Create Account</title>
+<meta name="description" content="Create a new Stella Orr'e account to access exclusive interior design features.">
+<!-- Stylesheets — same set as every other page on the site -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
 
-    <style>
-        /* ── Global Reset & Base ────────────────────────────────────────── */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
 
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+<!-- Responsive -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-        /* ── Card Container ─────────────────────────────────────────────── */
-        .register-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 16px;
-            padding: 40px 36px;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
+<style>
+/* ── Auth Form Section ──────────────────────────────────────────────────── */
+.auth-section {
+    position: relative;
+    padding: 80px 0 100px;
+    background-color: #f8f6f2;
+}
 
-        /* ── Heading ────────────────────────────────────────────────────── */
-        .register-container h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 6px;
-            letter-spacing: -0.5px;
-        }
+/* Card wrapper */
+.auth-card {
+    max-width: 520px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e8e2d9;
+    padding: 50px 48px 44px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+}
 
-        .register-container .subtitle {
-            text-align: center;
-            color: rgba(255,255,255,0.55);
-            font-size: 0.9rem;
-            margin-bottom: 28px;
-        }
+.auth-card h2 {
+    font-family: 'Rufina', serif;
+    font-size: 32px;
+    color: #242424;
+    margin-bottom: 6px;
+}
 
-        /* ── Form Groups ────────────────────────────────────────────────── */
-        .form-group {
-            margin-bottom: 18px;
-        }
+.auth-card .auth-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #787878;
+    margin-bottom: 32px;
+}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            color: rgba(255, 255, 255, 0.75);
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
+/* Form fields */
+.auth-form .form-field {
+    margin-bottom: 20px;
+}
 
-        .form-group input {
-            width: 100%;
-            padding: 12px 14px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 0.95rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            outline: none;
-        }
+.auth-form label {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 8px;
+}
 
-        .form-group input::placeholder { color: rgba(255,255,255,0.3); }
+.auth-form .label-note {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #aaa;
+    margin-left: 6px;
+}
 
-        .form-group input:focus {
-            border-color: #e94560;
-            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
-        }
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="text"] {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #242424;
+    background: #fafaf8;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-        /* ── Password Requirement Checklist ─────────────────────────────── */
-        .password-rules {
-            margin-top: 10px;
-            padding: 12px 14px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 8px;
-            list-style: none;
-        }
+.auth-form input:focus {
+    border-color: #dfb162;
+    box-shadow: 0 0 0 3px rgba(223,177,98,0.15);
+}
 
-        .password-rules li {
-            font-size: 0.82rem;
-            padding: 3px 0;
-            color: rgba(255,255,255,0.45);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.2s;
-        }
+/* ── Password requirement checklist ──────────────────────────────────────── */
+.password-rules {
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: #fafaf8;
+    border: 1px solid #ece8e1;
+    list-style: none;
+}
 
-        /* Green when rule passes, red when it fails */
-        .password-rules li.rule-pass { color: #4ade80; }
-        .password-rules li.rule-fail { color: #f87171; }
+.password-rules li {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #aaa;
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.25s;
+}
 
-        .rule-icon {
-            font-weight: 700;
-            font-size: 0.85rem;
-            width: 14px;
-            text-align: center;
-        }
+/* Rule pass = gold/green, rule fail = warm red */
+.password-rules li.rule-pass { color: #b8860b; }
+.password-rules li.rule-fail { color: #c0392b; }
 
-        /* ── Submit Button ──────────────────────────────────────────────── */
-        .btn-register {
-            width: 100%;
-            padding: 13px;
-            margin-top: 8px;
-            background: linear-gradient(135deg, #e94560, #c62a47);
-            border: none;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            letter-spacing: 0.3px;
-            transition: opacity 0.2s, transform 0.1s;
-        }
+.rule-icon {
+    font-weight: 700;
+    font-size: 12px;
+    width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+}
 
-        .btn-register:hover  { opacity: 0.9; transform: translateY(-1px); }
-        .btn-register:active { transform: translateY(0); }
+/* ── Submit button — matches .btn-style-one ───────────────────────────────── */
+.auth-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 26px;
+    margin-top: 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #242424;
+    background-color: #dfb162;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
 
-        /* ── Feedback Message ───────────────────────────────────────────── */
-        #message {
-            margin-top: 16px;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            text-align: center;
-            display: none;         /* hidden until there's a message */
-        }
+.auth-btn:hover {
+    background-color: #c99a48;
+    color: #ffffff;
+}
 
-        #message:not(:empty) { display: block; }
+/* ── Feedback message ────────────────────────────────────────────────────── */
+.auth-message {
+    margin-top: 16px;
+    padding: 10px 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    text-align: center;
+    display: none;
+}
 
-        #message.success {
-            background: rgba(74, 222, 128, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(74, 222, 128, 0.3);
-        }
+.auth-message.error {
+    background: #fdf0f0;
+    color: #c0392b;
+    border-left: 3px solid #c0392b;
+    display: block;
+}
 
-        #message.error {
-            background: rgba(248, 113, 113, 0.15);
-            color: #f87171;
-            border: 1px solid rgba(248, 113, 113, 0.3);
-        }
+.auth-message.success {
+    background: #f0fdf4;
+    color: #27ae60;
+    border-left: 3px solid #27ae60;
+    display: block;
+}
 
-        #message.info {
-            background: rgba(96, 165, 250, 0.15);
-            color: #60a5fa;
-            border: 1px solid rgba(96, 165, 250, 0.3);
-        }
+.auth-message.info {
+    background: #f0f8ff;
+    color: #2980b9;
+    border-left: 3px solid #2980b9;
+    display: block;
+}
 
-        /* ── Login Link ─────────────────────────────────────────────────── */
-        .login-link {
-            margin-top: 20px;
-            text-align: center;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.875rem;
-        }
+/* ── Footer link / divider ───────────────────────────────────────────────── */
+.auth-footer-link {
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #787878;
+}
 
-        .login-link a {
-            color: #e94560;
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.2s;
-        }
+.auth-footer-link a {
+    color: #dfb162;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
 
-        .login-link a:hover { opacity: 0.8; }
-    </style>
+.auth-footer-link a:hover { color: #c99a48; }
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    color: #ccc;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e8e2d9;
+}
+
+/* Auth nav button in header */
+.auth-nav-btn { display: inline-block; margin-left: 12px; vertical-align: middle; }
+</style>
 </head>
+
 <body>
 
-<div class="register-container">
-    <h1>Create Account</h1>
-    <p class="subtitle">Fill in the details below to get started</p>
+<div class="page-wrapper">
+    <!-- Preloader -->
+    <div class="preloader"></div>
 
-    <!-- Registration Form -->
-    <form id="registerForm" novalidate>
-
-        <!-- Full Name field -->
-        <div class="form-group">
-            <label for="name">Full Name</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="e.g. John Doe"
-                required
-                autocomplete="name"
-            >
+    <!-- ── Main Header ──────────────────────────────────────────────────── -->
+    <header class="main-header header-style-one">
+        <!--Header Top-->
+        <div class="header-top">
+            <div class="auto-container clearfix">
+                <div class="top-left clearfix">
+                    <div class="text"><span class="icon flaticon-call-answer"></span> Need help? Call Us Now : <a href="tel:1800-456-7890" class="number">1800 456 7890</a></div>
+                </div>
+                <div class="top-right clearfix">
+                    <ul class="info-list">
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="blog.html">Inspiration</a></li>
+                        <li class="quote"><a href="contact.html">Get Free Quote</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <!-- Email (used as username) field -->
-        <div class="form-group">
-            <label for="email">Email Address <span style="color:rgba(255,255,255,0.35);font-size:0.78rem;">(used as your username)</span></label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-                autocomplete="email"
-            >
+        <!-- Header Upper -->
+        <div class="header-upper">
+            <div class="inner-container">
+                <div class="auto-container clearfix">
+                    <div class="logo-outer">
+                        <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Stella Orr'e" title=""></a></div>
+                    </div>
+
+                    <div class="nav-outer clearfix">
+                        <div class="mobile-nav-toggler"><span class="icon flaticon-menu-1"></span></div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="navbar-header">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="icon flaticon-menu-1"></span>
+                                </button>
+                            </div>
+                            <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li class="dropdown"><a href="index.html">Home</a></li>
+                                    <li class="dropdown"><a href="about.html">About us</a></li>
+                                    <li class="dropdown"><a href="services-dark.html">Services</a></li>
+                                    <li class="dropdown"><a href="projects-classic.html">Projects</a></li>
+                                    <li class="dropdown"><a href="blog.html">Blog</a></li>
+                                    <li class="dropdown"><a href="shop.html">Shop</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+
+                        <!-- Outer Box — search + auth button -->
+                        <div class="outer-box clearfix">
+                            <div class="search-box-btn"><span class="icon flaticon-magnifying-glass-1"></span></div>
+                            <div class="auth-nav-btn">
+                                <a href="login.html" id="navAuthBtn" class="theme-btn btn-style-one" style="padding:8px 20px; font-size:12px; letter-spacing:2px;">
+                                    <span class="txt">Sign In</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Password field with live checklist below -->
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Create a strong password"
-                required
-                autocomplete="new-password"
-            >
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><span class="icon flaticon-cancel"></span></div>
+            <nav class="menu-box">
+                <div class="nav-logo"><a href="index.html"><img src="images/logo.png" alt="" title=""></a></div>
+                <ul class="navigation clearfix"><!--Keep This Empty / Menu will come through Javascript--></ul>
+                <div class="social-links">
+                    <ul class="clearfix">
+                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                        <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                        <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                        <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- End Mobile Menu -->
+    </header>
+    <!-- End Main Header -->
 
-            <!-- Live password requirement checklist — updated by register.js -->
-            <ul class="password-rules" aria-label="Password requirements">
-                <li id="rule-length">
-                    <span class="rule-icon">✗</span> At least 8 characters
-                </li>
-                <li id="rule-uppercase">
-                    <span class="rule-icon">✗</span> At least one uppercase letter (A-Z)
-                </li>
-                <li id="rule-special">
-                    <span class="rule-icon">✗</span> At least one special character (!, @, #, $, %, ^, &amp;, *)
-                </li>
+    <!-- Page Title Banner -->
+    <section class="page-title" style="background-image:url(images/background/5.jpg)">
+        <div class="auto-container">
+            <h2>Create Account</h2>
+            <ul class="page-breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li>Register</li>
             </ul>
         </div>
+    </section>
 
-        <button type="submit" class="btn-register" id="registerBtn">Create Account</button>
-    </form>
+    <!-- ── Registration Form Section ──────────────────────────────────── -->
+    <section class="auth-section">
+        <div class="auto-container">
+            <div class="auth-card">
+                <h2>Join Stella Orr'e</h2>
+                <p class="auth-sub">Create your account and start designing your dream space.</p>
 
-    <!-- Server / validation feedback message -->
-    <div id="message" role="alert"></div>
+                <form id="registerForm" class="auth-form" novalidate>
 
-    <p class="login-link">
-        Already have an account? <a href="/login.html">Log in</a>
-    </p>
+                    <!-- Full Name -->
+                    <div class="form-field">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="e.g. John Doe" required autocomplete="name">
+                    </div>
+
+                    <!-- Email (used as username) -->
+                    <div class="form-field">
+                        <label for="email">
+                            Email Address
+                            <span class="label-note">(used as your username)</span>
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+
+                    <!-- Password with live checklist -->
+                    <div class="form-field">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Create a strong password" required autocomplete="new-password">
+
+                        <!-- Live password requirement checklist — updated by register.js -->
+                        <ul class="password-rules" aria-label="Password requirements">
+                            <li id="rule-length">
+                                <span class="rule-icon">✗</span> At least 8 characters
+                            </li>
+                            <li id="rule-uppercase">
+                                <span class="rule-icon">✗</span> At least one uppercase letter (A–Z)
+                            </li>
+                            <li id="rule-special">
+                                <span class="rule-icon">✗</span> At least one special character (!, @, #, $, %, ^, &amp;, *)
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button type="submit" class="auth-btn" id="registerBtn">Create Account</button>
+                </form>
+
+                <!-- Feedback message from server or validation -->
+                <div id="message" class="auth-message" role="alert"></div>
+
+                <div class="auth-divider">or</div>
+
+                <p class="auth-footer-link">
+                    Already have an account? <a href="login.html">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- End Registration Form Section -->
+
+    <!--Main Footer-->
+    <footer class="main-footer">
+        <div class="auto-container">
+            <div class="widgets-section">
+                <div class="row clearfix">
+                    <div class="big-column col-lg-6 col-md-12 col-sm-12">
+                        <div class="row clearfix">
+                            <div class="footer-column col-lg-7 col-md-6 col-sm-12">
+                                <div class="footer-widget logo-widget">
+                                    <div class="logo">
+                                        <a href="index.html"><img src="images/footer-logo.png" alt="" /></a>
+                                    </div>
+                                    <div class="text">Stella Orr'e is a WordPress theme to build Interior websites. It has good features and you will love.</div>
+                                    <ul class="social-icons">
+                                        <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-linkedin-in"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-google-plus-g"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="footer-column col-lg-5 col-md-6 col-sm-12">
+                                <div class="footer-widget links-widget">
+                                    <h2>Quick links</h2>
+                                    <div class="widget-content">
+                                        <ul class="list">
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="#">Privacy Policy</a></li>
+                                            <li><a href="#">Terms &amp; Conditions</a></li>
+                                            <li><a href="#">Faq</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="big-column col-lg-6 col-md-12 col-sm-12">
+                        <div class="row clearfix">
+                            <div class="footer-column col-lg-5 col-md-6 col-sm-12">
+                                <div class="footer-widget contact-widget">
+                                    <h2>Contact Info</h2>
+                                    <div class="widget-content">
+                                        <a href="tel:1800-574-9687" class="contact-number">(1800) 574 9687</a>
+                                        <ul>
+                                            <li>256, Stella Orr'e, New York 24</li>
+                                            <li>Email :<a href="mailto:info@stellaorre.com"> info@stellaorre.com</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-column col-lg-7 col-md-6 col-sm-12">
+                                <div class="footer-widget newsletter-widget">
+                                    <h2>Newsletter</h2>
+                                    <div class="text">Get Special offers &amp; Discounts</div>
+                                    <div class="newsletter-form">
+                                        <form method="post" action="#">
+                                            <div class="form-group">
+                                                <input type="email" name="email" value="" placeholder="Enter your email address" required>
+                                                <button type="submit" class="theme-btn btn-style-one"><span class="txt">Subscribe</span></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom clearfix">
+                <div class="pull-left">
+                    <div class="copyright">&copy; 2024 Stella Orr'e. All Rights Reserved.</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<!--End pagewrapper-->
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
+
+<!--Search Popup-->
+<div id="search-popup" class="search-popup">
+    <div class="close-search theme-btn"><span class="flaticon-cancel"></span></div>
+    <div class="popup-inner">
+        <div class="overlay-layer"></div>
+        <div class="search-form">
+            <form method="post" action="#">
+                <div class="form-group">
+                    <fieldset>
+                        <input type="search" class="form-control" name="search-input" value="" placeholder="Search Here" required>
+                        <input type="submit" value="Search Now!" class="theme-btn">
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
-<!-- Load the registration frontend logic -->
-<script src="/js/register.js"></script>
+<!-- Scripts -->
+<script src="js/jquery.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.fancybox.js"></script>
+<script src="js/owl.js"></script>
+<script src="js/wow.js"></script>
+<script src="js/appear.js"></script>
+<script src="js/scrollbar.js"></script>
+<script src="js/script.js"></script>
+
+<!-- Register-specific logic (validation + API call) -->
+<script src="js/register.js"></script>
+
+<script>
+/**
+ * Update the nav auth button based on localStorage token state.
+ * If the user already has a token, show "My Account" instead of "Sign In".
+ */
+(function () {
+    const token  = localStorage.getItem('token');
+    const navBtn = document.getElementById('navAuthBtn');
+    if (token && navBtn) {
+        navBtn.querySelector('.txt').textContent = 'My Account';
+        navBtn.href = '#';
+        navBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            localStorage.removeItem('token');
+            window.location.reload();
+        });
+    }
+})();
+</script>
 
 </body>
 </html>

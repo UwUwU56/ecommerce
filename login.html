@@ -1,129 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - E-commerce</title>
-    <link rel="stylesheet" href="css/style.css"> <!-- Assuming a generic style file exists, we will add inline styles for safety -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        .login-container h2 {
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        #message {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 14px;
-        }
-        .error { color: red; }
-        .success { color: green; }
-    </style>
+<meta charset="utf-8">
+<title>Stella Orr'e - Sign In</title>
+<meta name="description" content="Sign in to your Stella Orr'e account to access exclusive interior design features.">
+<!-- Stylesheets -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+<!-- Responsive -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<style>
+/* ── Auth Form Section ──────────────────────────────────────────────────── */
+.auth-section {
+    position: relative;
+    padding: 80px 0 100px;
+    background-color: #f8f6f2;
+}
+
+/* Card that wraps the form */
+.auth-card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e8e2d9;
+    padding: 50px 48px 44px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+}
+
+.auth-card h2 {
+    font-family: 'Rufina', serif;
+    font-size: 32px;
+    color: #242424;
+    margin-bottom: 6px;
+}
+
+.auth-card .auth-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #787878;
+    margin-bottom: 32px;
+}
+
+/* Form fields */
+.auth-form .form-field {
+    margin-bottom: 20px;
+}
+
+.auth-form label {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="text"] {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #242424;
+    background: #fafaf8;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.auth-form input:focus {
+    border-color: #dfb162;
+    box-shadow: 0 0 0 3px rgba(223,177,98,0.15);
+}
+
+/* Submit button — uses the site's btn-style-one look */
+.auth-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 26px;
+    margin-top: 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #242424;
+    background-color: #dfb162;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+    background-color: #c99a48;
+    color: #ffffff;
+}
+
+/* Feedback message */
+.auth-message {
+    margin-top: 16px;
+    padding: 10px 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    text-align: center;
+    display: none;
+}
+
+.auth-message.error {
+    background: #fdf0f0;
+    color: #c0392b;
+    border-left: 3px solid #c0392b;
+    display: block;
+}
+
+.auth-message.success {
+    background: #f0fdf4;
+    color: #27ae60;
+    border-left: 3px solid #27ae60;
+    display: block;
+}
+
+.auth-message.info {
+    background: #f0f8ff;
+    color: #2980b9;
+    border-left: 3px solid #2980b9;
+    display: block;
+}
+
+/* Footer link */
+.auth-footer-link {
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #787878;
+}
+
+.auth-footer-link a {
+    color: #dfb162;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-footer-link a:hover {
+    color: #c99a48;
+}
+
+/* Divider line */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    color: #ccc;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e8e2d9;
+}
+</style>
 </head>
+
 <body>
 
-<div class="login-container">
-    <h2>Login</h2>
-    <form id="loginForm">
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" id="email" name="email" required>
+<div class="page-wrapper">
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- ── Main Header ─────────────────────────────────────────────── -->
+    <header class="main-header header-style-one">
+        <!--Header Top-->
+        <div class="header-top">
+            <div class="auto-container clearfix">
+                <div class="top-left clearfix">
+                    <div class="text"><span class="icon flaticon-call-answer"></span> Need help? Call Us Now : <a href="tel:1800-456-7890" class="number">1800 456 7890</a></div>
+                </div>
+                <div class="top-right clearfix">
+                    <ul class="info-list">
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="blog.html">Inspiration</a></li>
+                        <li class="quote"><a href="contact.html">Get Free Quote</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+        <!-- End Header Top -->
+
+        <!-- Header Upper -->
+        <div class="header-upper">
+            <div class="inner-container">
+                <div class="auto-container clearfix">
+                    <div class="logo-outer">
+                        <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Stella Orr'e" title=""></a></div>
+                    </div>
+
+                    <!--Nav Box-->
+                    <div class="nav-outer clearfix">
+                        <div class="mobile-nav-toggler"><span class="icon flaticon-menu-1"></span></div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="navbar-header">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="icon flaticon-menu-1"></span>
+                                </button>
+                            </div>
+                            <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li class="dropdown"><a href="index.html">Home</a></li>
+                                    <li class="dropdown"><a href="about.html">About us</a></li>
+                                    <li class="dropdown"><a href="services-dark.html">Services</a></li>
+                                    <li class="dropdown"><a href="projects-classic.html">Projects</a></li>
+                                    <li class="dropdown"><a href="blog.html">Blog</a></li>
+                                    <li class="dropdown"><a href="shop.html">Shop</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+
+                        <!-- Outer Box — search + auth buttons -->
+                        <div class="outer-box clearfix">
+                            <div class="search-box-btn"><span class="icon flaticon-magnifying-glass-1"></span></div>
+                            <!-- Auth button: shows Sign In when logged out, account name when logged in -->
+                            <div class="auth-nav-btn" style="display:inline-block; margin-left:12px; vertical-align:middle;">
+                                <a href="login.html" id="navAuthBtn" class="theme-btn btn-style-one" style="padding:8px 20px; font-size:12px; letter-spacing:2px;">
+                                    <span class="txt">Sign In</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button type="submit">Log In</button>
-    </form>
-    <div id="message"></div>
+        <!--End Header Upper-->
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><span class="icon flaticon-cancel"></span></div>
+            <nav class="menu-box">
+                <div class="nav-logo"><a href="index.html"><img src="images/logo.png" alt="" title=""></a></div>
+                <ul class="navigation clearfix"><!--Keep This Empty / Menu will come through Javascript--></ul>
+                <div class="social-links">
+                    <ul class="clearfix">
+                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                        <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                        <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                        <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- End Mobile Menu -->
+    </header>
+    <!-- End Main Header -->
+
+    <!-- Page Title Banner -->
+    <section class="page-title" style="background-image:url(images/background/5.jpg)">
+        <div class="auto-container">
+            <h2>Sign In</h2>
+            <ul class="page-breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li>Sign In</li>
+            </ul>
+        </div>
+    </section>
+    <!--End Page Title-->
+
+    <!-- ── Login Form Section ──────────────────────────────────────── -->
+    <section class="auth-section">
+        <div class="auto-container">
+            <div class="auth-card">
+                <h2>Welcome Back</h2>
+                <p class="auth-sub">Sign in to your Stella Orr'e account to continue.</p>
+
+                <form id="loginForm" class="auth-form" novalidate>
+                    <!-- Email field -->
+                    <div class="form-field">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+
+                    <!-- Password field -->
+                    <div class="form-field">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Your password" required autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="auth-btn" id="loginBtn">Sign In</button>
+                </form>
+
+                <!-- Server feedback message -->
+                <div id="message" class="auth-message" role="alert"></div>
+
+                <div class="auth-divider">or</div>
+
+                <p class="auth-footer-link">
+                    Don't have an account? <a href="register.html">Create one</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- End Login Form Section -->
+
+    <!--Main Footer-->
+    <footer class="main-footer">
+        <div class="auto-container">
+            <div class="widgets-section">
+                <div class="row clearfix">
+                    <div class="big-column col-lg-6 col-md-12 col-sm-12">
+                        <div class="row clearfix">
+                            <div class="footer-column col-lg-7 col-md-6 col-sm-12">
+                                <div class="footer-widget logo-widget">
+                                    <div class="logo">
+                                        <a href="index.html"><img src="images/footer-logo.png" alt="" /></a>
+                                    </div>
+                                    <div class="text">Stella Orr'e is a WordPress theme to build Interior websites. It has good features and you will love.</div>
+                                    <ul class="social-icons">
+                                        <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-linkedin-in"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-google-plus-g"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="footer-column col-lg-5 col-md-6 col-sm-12">
+                                <div class="footer-widget links-widget">
+                                    <h2>Quick links</h2>
+                                    <div class="widget-content">
+                                        <ul class="list">
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="#">Privacy Policy</a></li>
+                                            <li><a href="#">Terms &amp; Conditions</a></li>
+                                            <li><a href="#">Faq</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="big-column col-lg-6 col-md-12 col-sm-12">
+                        <div class="row clearfix">
+                            <div class="footer-column col-lg-5 col-md-6 col-sm-12">
+                                <div class="footer-widget contact-widget">
+                                    <h2>Contact Info</h2>
+                                    <div class="widget-content">
+                                        <a href="tel:1800-574-9687" class="contact-number">(1800) 574 9687</a>
+                                        <ul>
+                                            <li>256, Stella Orr'e, New York 24</li>
+                                            <li>Email :<a href="mailto:info@stellaorre.com"> info@stellaorre.com</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-column col-lg-7 col-md-6 col-sm-12">
+                                <div class="footer-widget newsletter-widget">
+                                    <h2>Newsletter</h2>
+                                    <div class="text">Get Special offers &amp; Discounts</div>
+                                    <div class="newsletter-form">
+                                        <form method="post" action="#">
+                                            <div class="form-group">
+                                                <input type="email" name="email" value="" placeholder="Enter your email address" required>
+                                                <button type="submit" class="theme-btn btn-style-one"><span class="txt">Subscribe</span></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Footer Bottom-->
+            <div class="footer-bottom clearfix">
+                <div class="pull-left">
+                    <div class="copyright">&copy; 2024 Stella Orr'e. All Rights Reserved.</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<!--End pagewrapper-->
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
+
+<!--Search Popup-->
+<div id="search-popup" class="search-popup">
+    <div class="close-search theme-btn"><span class="flaticon-cancel"></span></div>
+    <div class="popup-inner">
+        <div class="overlay-layer"></div>
+        <div class="search-form">
+            <form method="post" action="#">
+                <div class="form-group">
+                    <fieldset>
+                        <input type="search" class="form-control" name="search-input" value="" placeholder="Search Here" required>
+                        <input type="submit" value="Search Now!" class="theme-btn">
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
+<!-- Scripts -->
+<script src="js/jquery.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.fancybox.js"></script>
+<script src="js/owl.js"></script>
+<script src="js/wow.js"></script>
+<script src="js/appear.js"></script>
+<script src="js/scrollbar.js"></script>
+<script src="js/script.js"></script>
+
 <script>
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+/**
+ * Login form handler
+ * Sends POST /api/login with { email, password }
+ * Stores JWT in localStorage and redirects on success
+ */
+(function () {
+    // Show the nav button correctly on load
+    const token = localStorage.getItem('token');
+    const navBtn = document.getElementById('navAuthBtn');
+    if (token && navBtn) {
+        navBtn.textContent = 'My Account';
+        navBtn.href = '#';
+        navBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('token');
+            window.location.reload();
+        });
+    }
+
+    const form = document.getElementById('loginForm');
+    const msgDiv = document.getElementById('message');
+
+    function showMsg(text, type) {
+        msgDiv.textContent = text;
+        msgDiv.className = 'auth-message ' + type;
+    }
+
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        
-        const email = document.getElementById('email').value;
+
+        const email    = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
-        const messageDiv = document.getElementById('message');
-        
-        messageDiv.textContent = 'Logging in...';
-        messageDiv.className = '';
+
+        if (!email || !password) {
+            showMsg('Please enter your email and password.', 'error');
+            return;
+        }
+
+        showMsg('Signing in…', 'info');
 
         try {
-            const response = await fetch('/api/login', {
+            const res  = await fetch('/api/login', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
+            const data = await res.json();
 
-            const data = await response.json();
-
-            if (response.ok) {
-                messageDiv.textContent = 'Login successful!';
-                messageDiv.className = 'success';
-                // Store the token in localStorage
+            if (res.ok) {
+                // Store JWT and redirect to homepage
                 localStorage.setItem('token', data.token);
-                // Optionally redirect
-                setTimeout(() => {
-                    window.location.href = '/index.html';
-                }, 1000);
+                showMsg('Sign in successful! Redirecting…', 'success');
+                setTimeout(() => { window.location.href = '/index.html'; }, 1000);
             } else {
-                messageDiv.textContent = data.message || 'Login failed';
-                messageDiv.className = 'error';
+                showMsg(data.message || 'Invalid email or password.', 'error');
             }
-        } catch (error) {
-            console.error('Error:', error);
-            messageDiv.textContent = 'An error occurred. Please try again.';
-            messageDiv.className = 'error';
+        } catch (err) {
+            console.error('Login error:', err);
+            showMsg('Network error. Please try again.', 'error');
         }
     });
+})();
 </script>
 
 </body>
