@@ -1,5 +1,7 @@
 const express = require('express');
 const productsRouter = require('./src/routes/products');
+const db = require('./src/database/db'); // Initialize SQLite & create tables
+
 
 const app = express();
 

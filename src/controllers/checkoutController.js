@@ -1,4 +1,5 @@
 // Checkout Controller
+const db = require('../database/db');
 
 exports.processCheckout = (req, res) => {
     try {
@@ -40,17 +41,46 @@ exports.processCheckout = (req, res) => {
             total += price * quantity;
         });
 
-        // "Save Order" step (Mocked here)
-        // If we wanted to test a failure in save order, we could throw an error here.
-        const orderSaved = true; // Simulating successful save
-        if (!orderSaved) {
-            throw { status: 500, message: "Failed to save order to the database." };
-        }
+        // "Save Order" step — real SQLite INSERT per cart item
+        // SQL: INSERT INTO orders (user_id, product_id, quantity, total_price)
+        const SQL = `INSERT INTO orders (user_id, product_id, quantity, total_price)
+                     VALUES (?, ?, ?, ?)`;
 
-        // Respond with success
-        res.status(200).json({
-            message: "Order processed successfully!",
-            total: total
+        // user_id is taken from the JWT payload if auth is used, else default to 0
+        const user_id = req.user ? req.user.id : 0;
+
+        // Use a counter to know when all inserts are done
+        let completed = 0;
+        let insertError = null;
+
+        cartItems.forEach((item) => {
+            const product_id  = item.id       || 0;
+            const quantity    = parseInt(item.quantity) || 1;
+            const item_total  = (parseFloat(item.price) || 0) * quantity;
+
+            db.run(SQL, [user_id, product_id, quantity, item_total], function (err) {
+                if (err) {
+                    console.error('❌ DB INSERT error:', err.message);
+                    insertError = err;
+                } else {
+                    console.log(`✅ Order row saved — id: ${this.lastID}`);
+                }
+
+                completed++;
+                if (completed === cartItems.length) {
+                    // All inserts attempted — respond to client
+                    if (insertError) {
+                        return res.status(500).json({
+                            message: "Failed to save order to the database.",
+                            errors: { general: insertError.message }
+                        });
+                    }
+                    return res.status(200).json({
+                        message: "Order processed successfully!",
+                        total: total
+                    });
+                }
+            });
         });
 
     } catch (error) {
