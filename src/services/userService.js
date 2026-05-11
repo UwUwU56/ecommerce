@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userRepository = require('../repositories/userRepository');
 
-const JWT_SECRET = 'your_jwt_secret_key_here';
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 const SALT_ROUNDS = 10;
 
 /**

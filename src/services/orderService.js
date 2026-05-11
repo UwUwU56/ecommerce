@@ -43,15 +43,37 @@ class OrderService {
             // In a real microservice, we might fallback to treating them as a guest instead of crashing.
         }
 
+        const productsService = require('./productsService');
+        const allProducts = productsService.getAllProducts();
+
         let total = 0;
-        const itemsToSave = cartItems.map(item => {
-            const price = parseFloat(item.price) || 0;
-            const quantity = parseInt(item.quantity) || 1;
-            total += price * quantity;
-            const product_id = item.id || 0;
-            const item_total = price * quantity;
-            return { product_id, quantity, item_total };
-        });
+        const itemsToSave = [];
+
+        for (const item of cartItems) {
+            const quantity = parseInt(item.quantity);
+            const product_id = parseInt(item.id);
+
+            // VULNERABILITY FIX 2: Missing Validation (Negative Quantity)
+            // Attacker could send -10 quantity to get a negative total (refund).
+            if (isNaN(quantity) || quantity <= 0) {
+                throw { status: 400, errors: { cartItems: `Invalid quantity for product ${product_id}. Must be greater than 0.` }, message: "Validation failed" };
+            }
+
+            // VULNERABILITY FIX 3: Missing Validation (Product Existence)
+            // Attacker could send fake product IDs (like 0) and pollute the database.
+            const realProduct = allProducts.find(p => p.id === product_id);
+            if (!realProduct) {
+                throw { status: 400, errors: { cartItems: `Product ID ${product_id} does not exist.` }, message: "Validation failed" };
+            }
+
+            // VULNERABILITY FIX 1: Parameter Tampering (Price)
+            // Attacker could send { price: 0.01 } from the frontend. We MUST fetch the true price from our database/service.
+            const truePrice = parseFloat(realProduct.price) || 0;
+            const item_total = truePrice * quantity;
+            
+            total += item_total;
+            itemsToSave.push({ product_id, quantity, item_total });
+        }
 
         // Save orders to db via Repository
         try {

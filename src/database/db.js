@@ -4,8 +4,8 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-// Resolve the path to store.db in the project root
-const DB_PATH = path.join(__dirname, '..', '..', 'store.db');
+// Resolve the path from env variable (Hard-coded value replaced)
+const DB_PATH = process.env.DATABASE_URL;
 
 // Open (or create) the database file
 const db = new sqlite3.Database(DB_PATH, (err) => {

@@ -5,7 +5,7 @@ const jwt  = require('jsonwebtoken');
 
 // Path to the JSON file that acts as our user "database"
 const dataPath  = path.join(__dirname, '../data/auth_user.json');
-const JWT_SECRET = 'your_jwt_secret_key_here'; // In production, load from an environment variable
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret'; // In production, load from an environment variable
 
 // How many salt rounds bcrypt will use — higher = slower (more secure), 10 is a sensible default
 const SALT_ROUNDS = 10;
